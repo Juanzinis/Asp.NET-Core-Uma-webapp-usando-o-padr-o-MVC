@@ -2,6 +2,7 @@
 using Alura.ListaLeitura.App.Negocio;
 using Alura.ListaLeitura.App.Repositorio;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using System;
 using System.Collections.Generic;
@@ -20,10 +21,10 @@ namespace Alura.ListaLeitura.App.Logica
             return "O livro foi adicionado com sucesso!";
         }
 
-        public static Task ExibeFormulario(HttpContext context)
+        public IActionResult ExibeFormulario(HttpContext context)
         {
-            var html = HtmlUtils.CarregaArquivoHTML("formulario");
-            return context.Response.WriteAsync(html);
+            var html = new ViewResult { ViewName = "formulario" };
+            return html;
         }
 
         public static Task Roteamento(HttpContext context)
