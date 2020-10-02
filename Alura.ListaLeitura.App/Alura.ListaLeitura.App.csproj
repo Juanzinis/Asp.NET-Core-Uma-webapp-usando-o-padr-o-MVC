@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="microsoft.aspnetcore" Version="2.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.2" />
   </ItemGroup>
 
 </Project>

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Alura.ListaLeitura.App.Logica
 {
-    public class CadastroLogica
+    public class CadastroController
     {
         public static Task Incluir(HttpContext context)
         {
@@ -50,9 +50,9 @@ namespace Alura.ListaLeitura.App.Logica
             var _repo = new LivroRepositorioCSV();
             var caminhosAtendidos = new Dictionary<string, RequestDelegate>
             {
-                { "/Livros/ParaLer", LivrosLogica.ParaLer },
-                { "/Livros/Lendo", LivrosLogica.Lendo },
-                { "/Livros/Lidos", LivrosLogica.Lidos }
+                { "/Livros/ParaLer", LivrosController.ParaLer },
+                { "/Livros/Lendo", LivrosController.Lendo },
+                { "/Livros/Lidos", LivrosController.Lidos }
             };
 
             if (caminhosAtendidos.ContainsKey(context.Request.Path))

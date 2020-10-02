@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Alura.ListaLeitura.App.Logica
 {
-    public class LivrosLogica
+    public class LivrosController
     {
         public static Task Detalhes(HttpContext context)
         {
@@ -59,6 +59,11 @@ namespace Alura.ListaLeitura.App.Logica
             var html = CarregaLista(_repo.Lidos.Livros);
 
             return context.Response.WriteAsync(_repo.Lidos.ToString());
+        }
+
+        public string Teste()
+        {
+            return "teste";
         }
     }
 }
