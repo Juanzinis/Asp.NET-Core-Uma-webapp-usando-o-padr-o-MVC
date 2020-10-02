@@ -11,19 +11,13 @@ using System.Threading.Tasks;
 
 namespace Alura.ListaLeitura.App.Logica
 {
-    public class CadastroLogica
+    public class CadastroController
     {
-        public static Task ProcessaFormulario(HttpContext context)
+        public string Incluir(Livro livro)
         {
-            var livro = new Livro()
-            {
-                Titulo = context.Request.Form["titulo"].First(),
-                Autor = context.Request.Form["autor"].First()
-            };
-
             var repo = new LivroRepositorioCSV();
             repo.Incluir(livro);
-            return context.Response.WriteAsync("O livro foi adicionado com sucesso!");
+            return "O livro foi adicionado com sucesso!";
         }
 
         public static Task ExibeFormulario(HttpContext context)
@@ -32,27 +26,14 @@ namespace Alura.ListaLeitura.App.Logica
             return context.Response.WriteAsync(html);
         }
 
-        public static Task NovoLivroParaLer(HttpContext context)
-        {
-            var livro = new Livro()
-            {
-                Titulo = Convert.ToString(context.GetRouteValue("nome")),
-                Autor = Convert.ToString(context.GetRouteValue("autor"))
-            };
-            var repo = new LivroRepositorioCSV();
-            repo.Incluir(livro);
-
-            return context.Response.WriteAsync("O livro foi adicionado com sucesso!");
-        }
-
         public static Task Roteamento(HttpContext context)
         {
             var _repo = new LivroRepositorioCSV();
             var caminhosAtendidos = new Dictionary<string, RequestDelegate>
             {
-                { "/Livros/ParaLer", LivrosLogica.LivrosParaLer },
-                { "/Livros/Lendo", LivrosLogica.LivrosLendo },
-                { "/Livros/Lidos", LivrosLogica.LivrosLidos }
+                { "/Livros/ParaLer", LivrosController.ParaLer },
+                { "/Livros/Lendo", LivrosController.Lendo },
+                { "/Livros/Lidos", LivrosController.Lidos }
             };
 
             if (caminhosAtendidos.ContainsKey(context.Request.Path))
