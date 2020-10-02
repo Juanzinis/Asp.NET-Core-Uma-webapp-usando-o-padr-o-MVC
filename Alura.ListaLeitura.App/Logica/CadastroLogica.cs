@@ -13,7 +13,7 @@ namespace Alura.ListaLeitura.App.Logica
 {
     public class CadastroLogica
     {
-        public static Task ProcessaFormulario(HttpContext context)
+        public static Task Incluir(HttpContext context)
         {
             var livro = new Livro()
             {
@@ -32,7 +32,7 @@ namespace Alura.ListaLeitura.App.Logica
             return context.Response.WriteAsync(html);
         }
 
-        public static Task NovoLivroParaLer(HttpContext context)
+        public static Task NovoLivro(HttpContext context)
         {
             var livro = new Livro()
             {
@@ -50,9 +50,9 @@ namespace Alura.ListaLeitura.App.Logica
             var _repo = new LivroRepositorioCSV();
             var caminhosAtendidos = new Dictionary<string, RequestDelegate>
             {
-                { "/Livros/ParaLer", LivrosLogica.LivrosParaLer },
-                { "/Livros/Lendo", LivrosLogica.LivrosLendo },
-                { "/Livros/Lidos", LivrosLogica.LivrosLidos }
+                { "/Livros/ParaLer", LivrosLogica.ParaLer },
+                { "/Livros/Lendo", LivrosLogica.Lendo },
+                { "/Livros/Lidos", LivrosLogica.Lidos }
             };
 
             if (caminhosAtendidos.ContainsKey(context.Request.Path))
