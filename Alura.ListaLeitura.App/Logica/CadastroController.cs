@@ -21,30 +21,10 @@ namespace Alura.ListaLeitura.App.Logica
             return "O livro foi adicionado com sucesso!";
         }
 
-        public IActionResult ExibeFormulario(HttpContext context)
+        public IActionResult ExibeFormulario()
         {
             var html = new ViewResult { ViewName = "formulario" };
             return html;
-        }
-
-        public static Task Roteamento(HttpContext context)
-        {
-            var _repo = new LivroRepositorioCSV();
-            var caminhosAtendidos = new Dictionary<string, RequestDelegate>
-            {
-                { "/Livros/ParaLer", LivrosController.ParaLer },
-                { "/Livros/Lendo", LivrosController.Lendo },
-                { "/Livros/Lidos", LivrosController.Lidos }
-            };
-
-            if (caminhosAtendidos.ContainsKey(context.Request.Path))
-            {
-                var metodo = caminhosAtendidos[context.Request.Path];
-                return metodo.Invoke(context);
-            }
-
-            context.Response.StatusCode = 404;
-            return context.Response.WriteAsync("Caminho inexistente");
         }
     }
 }
